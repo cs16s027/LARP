@@ -1,0 +1,10 @@
+face1.pgm,5924
+face2.pgm,5867
+face3.pgm,6015
+face4.pgm,5876
+face5.pgm,5899
+face6.pgm,5867
+face7.pgm,5925
+face8.pgm,5895
+face9.pgm,5928
+face10.pgm,5907

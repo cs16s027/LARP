@@ -8,3 +8,4 @@ face7.pgm,5925
 face8.pgm,5895
 face9.pgm,5928
 face10.pgm,5907
+face11.pgm,7097

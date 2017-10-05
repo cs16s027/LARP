@@ -5,11 +5,12 @@ import cv2
 # Function to plot the basis
 def plotBasis(eigbasis):
     # Plotting just 100 elements from the eigenbasis
-    for i in range(100):
+    for i in range(8464):
+        print i
         # Get the image - the transpose is necessary because the 
         # order of flattening was different while getting the 
         # eigenvectors
-        image = eigbasis[i].reshape([92, 92]).T
+        image = eigbasis[:, i].reshape([92, 92]).T
         # Normalize image
         image = image / np.max(image) * 255
         # Write image to disk
