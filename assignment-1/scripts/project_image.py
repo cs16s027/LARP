@@ -7,14 +7,6 @@ import cv2
 def norm(A):
     return np.linalg.norm(A)
 
-def Personalnorm():
-    row, col = A.shape
-    val = np.float32(0.0)
-    for x in range(row):
-        for y in range(col):
-            val += np.float32(A[x][y]) * np.float32(A[x][y])
-    return np.sqrt(val)
-
 # Retrurns the relative error between image and reconstruction
 def relativeError(image, recon):
     return norm(recon - image)
@@ -25,9 +17,9 @@ def projectImage(eigbasis, image, image_name):
     image_norm = norm(image)
     # Flatten the image to get a vector. Transpose is necessary for
     # compatability with eigenbasis column ordering.
-    image_vector = image.T.flatten()   # Changed rows to cols
+    image_vector = image.flatten(order = 'F')   # Changed rows to cols
     # Get the projections on to the eigenbasis (eigenbasis is orthogonal)
-    projections = np.dot(image_vector, eigbasis).flatten()
+    projections = np.dot(image_vector, eigbasis)
     # Sort projections according to the magnitude of the contributions
     indices = np.argsort(np.abs(projections))[::-1]
     # Reconstruction vector
@@ -37,9 +29,9 @@ def projectImage(eigbasis, image, image_name):
         # Index of the ith most contributing eigenvector
         index = indices[i]
         # Add this vector to the reconstruction
-        recon_vector += projections[index] * eigbasis[:, index] # Changed cols to rows
+        recon_vector += projections[index] * eigbasis[:, index]
         # This is the top-k eigenvector reconstruction
-        recon_image = recon_vector.reshape((92, 92)).T
+        recon_image = recon_vector.reshape((92, 92), order = 'F')
         cv2.imwrite('dump/%s.jpg' % str(i + 1), recon_image)
         # Relative error between error image and original image
         error = relativeError(image, recon_image) / image_norm

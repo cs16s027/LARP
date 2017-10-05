@@ -14,6 +14,7 @@ def plotIntensity(image, plot):
     ax.set_xlabel('Pixel values')
     ax.set_ylabel('Frequency')
     ax.set_xlim([0, 256])
+    ax.set_ylim([0, 180])
     # Save the plot
     plt.savefig(plot)
 

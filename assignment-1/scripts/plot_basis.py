@@ -10,7 +10,7 @@ def plotBasis(eigbasis):
         # Get the image - the transpose is necessary because the 
         # order of flattening was different while getting the 
         # eigenvectors
-        image = eigbasis[:, i].reshape([92, 92]).T
+        image = eigbasis[:, i].reshape([92, 92], order = 'F')
         # Normalize image
         image = image / np.max(image) * 255
         # Write image to disk
