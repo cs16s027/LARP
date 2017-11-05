@@ -99,7 +99,8 @@ if __name__ == '__main__':
     for c in conf:
         if c[0] < lamda and c[1] > lamda:
             count += 1
+            #print (c[1] - c[0]) / 2
     print count / num_exp * 100
     for sigma in sample_sigmas:
         ns = sampleEstimate(sigma)
-        #print sigma, ns[0], ns[1], ns[2]
+        print sigma, ns[0], ns[1], ns[2]
