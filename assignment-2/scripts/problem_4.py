@@ -4,17 +4,22 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
-def poisson(lamb, x):
-    return np.exp(-lamb) * (lamb ** x) / np.math.factorial(x)
+def invSquare(x):
+    A = 6 / (np.pi ** 2)
+    return A / (x ** 2)
 
-def samplePoisson(lamb = 10):
+def sampleinvSquare():
     r = np.random.uniform(0, 1)
     s = 0
-    i = 0 
+    i = 1
     while (s <= 1):
-        s += poisson(lamb, i)
+        s += invSquare(i)
         if s >= r:
-            return i
+            sign = np.random.uniform(0, 1)
+            if sign > 0.5:
+                return i
+            else:
+                return -i
         i = i + 1
 
 def runExperiment(N, num_exp):
@@ -23,7 +28,7 @@ def runExperiment(N, num_exp):
     for exp in np.arange(0, num_exp, 1):
         samples = np.zeros((N, ))
         for i in np.arange(0, N, 1):
-            samples[i] = samplePoisson()
+            samples[i] = sampleinvSquare()
         sample_means[exp] = np.mean(samples)
         sample_sigmas[exp] = np.std(samples)
     return sample_means, sample_sigmas
@@ -31,7 +36,9 @@ def runExperiment(N, num_exp):
 def plotMeans(sample_means, plot):
     fig = plt.figure() 
     ax = fig.gca()
-    ax.hist(sample_means, 1000)
+    ax.hist(sample_means, bins = np.arange(-10, 11, 1))
+    ax.set_xlim([-10, 10])
+    ax.set_ylim([0, 4000])
     plt.plot()
     plt.savefig(plot)
 
@@ -80,26 +87,28 @@ def sampleEstimate(sigma):
 
 if __name__ == '__main__':
     _, N = sys.argv
-    lamda = 10
     N = int(N)
     num_exp = 10000
+    mu = 0
     np.random.seed(0)
-    if not os.path.isfile('results/problem_3/%s.txt' % N):
+    if not os.path.isfile('results/problem_4/%s.txt' % N):
         sample_params = runExperiment(N, num_exp)
-        writeParams(sample_params, 'results/problem_3/%s.txt' % N)
-    sample_params = readParams('results/problem_3/%s.txt' % N)
+        writeParams(sample_params, 'results/problem_4/%s.txt' % N)
+    sample_params = readParams('results/problem_4/%s.txt' % N)
     sample_means, sample_sigmas = sample_params
-    plotMeans(sample_means, 'plots/problem_3/%s.jpg' % N)
-    count_1 = countInterval(sample_means, 9.99, 10.01)
-    count_2 = countInterval(sample_means, 9.9, 10.1)
-    print '[9.99, 10.01] : %s' % count_1
-    print '[9.9, 10.1]   : %s' % count_2
+    plotMeans(sample_means, 'plots/problem_4/%s.jpg' % N)
+    count_1 = countInterval(sample_means, -0.01, 0.01)
+    count_2 = countInterval(sample_means, -0.1, 0.1)
+    print '[-0.01, 0.01] : %s' % count_1
+    print '[-0.1, 0.1]   : %s' % count_2
     conf = buildConfidenceIntervals(sample_means, sample_sigmas, 1.96)
     count = 0.0
     for c in conf:
-        if c[0] < lamda and c[1] > lamda:
+        if c[0] < mu and c[1] > mu:
             count += 1
     print count / num_exp * 100
+    '''
     for sigma in sample_sigmas:
         ns = sampleEstimate(sigma)
-        #print sigma, ns[0], ns[1], ns[2]
+        print sigma, ns[0], ns[1], ns[2]
+    '''
