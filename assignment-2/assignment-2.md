@@ -102,4 +102,4 @@ $$
 n = \bigg(\frac{z \sigma}{\text{accuracy}}\bigg) ^2
 $$
 
-where, $z= -F^{-1}(\frac{\text{accuracy}}{2})$. $F^{-1}$ is the inverse of the Gaussian c.d.f.
+where, $z= -F^{-1}(\frac{\text{accuracy}}{2})$. $F^{-1}$ is the inverse of the Gaussian c.d.f. Every decimal drop in accuracy contributes to at least an order of magnitude increase in the number of samples required.
