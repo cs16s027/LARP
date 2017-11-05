@@ -1,4 +1,4 @@
-Each random variable $$X_i$$  is distributed with mean $\mu$ and variance $\sigma^{2}$. Then, the mean of the random variables is also a random variable:
+(1) Each random variable $$X_i$$  is distributed with mean $\mu$ and variance $\sigma^{2}$. Then, the mean of the random variables is also a random variable:
 $$
 \bar{X} = \frac{1}{N} \sum \limits_{i = 1}^{N} X_{i}
 $$
@@ -13,7 +13,7 @@ $$
 
 ---
 
-Letting $\delta = 2\ \text{exp}\bigg(-\frac{2N\epsilon^2}{(b - a)^2}\bigg)$ ,
+(2) Letting $\delta = 2\ \text{exp}\bigg(-\frac{2N\epsilon^2}{(b - a)^2}\bigg)$ ,
 $$
 \mathbb{P}(\bar{X} - \mu \geq \epsilon) \leq \frac{\delta}{2}\\
 \mathbb{P}(\bar{X} - \mu \leq -\epsilon) \leq \frac{\delta}{2}
@@ -35,6 +35,13 @@ The event $|\bar{X} - \mu| \leq \epsilon$ can be rewritten as $\mu \in [\bar{X} 
 Thus, the required probability becomes:
 $$
 \mathbb{P}(\mu \in [\bar{X} - \epsilon, \bar{X} + \epsilon])  \geq 1 - \delta
+$$
+
+---
+
+Since $\delta = 2\ \text{exp}\bigg(-\frac{2N\epsilon^2}{(b - a)^2}\bigg)$ , 
+$$
+\epsilon = \sqrt{\frac{(b-a)^2}{2N} ln\bigg(\frac{2}{\delta}\bigg)}
 $$
 
 
