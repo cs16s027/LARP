@@ -72,7 +72,7 @@ $$
 | 1000  |                46.65                 |
 | 10000 |                95.27                 |
 
-(d) The random variables given in problem-1 have a bounded support, $[a, b]$, whereas Poisson random variables have an unbounded support, $[-\infty, \infty]$.
+(d) The random variables given in problem-1 have a bounded support, $[a, b]$, whereas Poisson random variables have an unbounded support, $[0, \infty]$.
 
 Let $X_i ~ Bin(n, \frac{\lambda}{n})$ be the $i^{th}$ random variable with $\mu = \lambda, \sigma^2 = \lambda(1-\frac{\lambda}{n})$. 
 
@@ -88,7 +88,7 @@ For a large value of $n$, the Binomial distribution is quite a good approximatio
 $$
 \frac{n}{\sqrt{N}} = \frac{0.06}{1.36} = 0.04 \implies N = 625 n^2
 $$
-If we replace the Binomial with the Poisson for our numerical experiments, we wil have to sample several more examples to replicate the results.
+If we replace the Poisson with the Binomial for our numerical experiments, we wil have to sample several more examples to replicate the results.
 
 (e)
 
@@ -103,3 +103,23 @@ n = \bigg(\frac{z \sigma}{\text{accuracy}}\bigg) ^2
 $$
 
 where, $z= -F^{-1}(\frac{\text{accuracy}}{2})$. $F^{-1}$ is the inverse of the Gaussian c.d.f. Every decimal drop in accuracy contributes to at least an order of magnitude increase in the number of samples required.
+
+---
+
+#### Problem-4
+
+(a)
+$$
+f(k) = \frac{A}{k^2}, k \in \mathbb{Z} - \{0\}
+$$
+For $f$ to be a valid p.m.f, its sum over the support should be one.
+$$
+\sum \limits_{k = -\infty}^{\infty} \frac{A}{k^2} = 1 \implies A \frac{\pi^2}{3} = 1 \implies A = \frac{3}{\pi^2}
+$$
+(b)
+
+**Method** :  To sample from this p.m.f, we consider a modified distribution with a positive support:
+$$
+f^{+}(k) = \frac{A^{+}}{k^2}, k \in \mathbb{Z^{+}}
+$$
+where $A^{+} = \frac{6}{\pi^2}$. Let $S$ be a bernou
