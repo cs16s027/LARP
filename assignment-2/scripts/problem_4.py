@@ -65,11 +65,11 @@ def countInterval(sample_means, low, high):
             count += 1
     return count
 
-def buildConfidenceIntervals(means, sigmas, z):
-    N = means.shape[0]
+def buildConfidenceIntervals(means, sigmas, z, N):
+    exps = means.shape[0]
     mult = z / np.sqrt(N)
     conf = []
-    for i in range(N):
+    for i in range(exps):
         bound = sigmas[i] * mult
         conf.append((means[i] - bound, means[i] + bound))
     return conf
@@ -101,11 +101,12 @@ if __name__ == '__main__':
     count_2 = countInterval(sample_means, -0.1, 0.1)
     print '[-0.01, 0.01] : %s' % count_1
     print '[-0.1, 0.1]   : %s' % count_2
-    conf = buildConfidenceIntervals(sample_means, sample_sigmas, 1.96)
+    conf = buildConfidenceIntervals(sample_means, sample_sigmas, 1.96, N)
     count = 0.0
     for c in conf:
         if c[0] < mu and c[1] > mu:
             count += 1
+        print c[0], c[1]
     print count / num_exp * 100
     '''
     for sigma in sample_sigmas:
