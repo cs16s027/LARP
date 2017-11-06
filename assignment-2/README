@@ -1,0 +1,8 @@
+CS17Z015 - Sankaran Vaidyanathan
+CS16S027 - Karthik Thiagarajan
+
+To run the code, specify the number of samples as an argument
+python scripts/problem_3.py 10000
+python scripts/problem_4.py 1000
+
+The plots can be found in plots/problem-3 and plots/problem-4 folders

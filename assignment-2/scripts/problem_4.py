@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
 
+# Sample from the positive support 
 def invSquare(x):
     A = 6 / (np.pi ** 2)
     return A / (x ** 2)
@@ -15,6 +16,7 @@ def sampleinvSquare():
     while (s <= 1):
         s += invSquare(i)
         if s >= r:
+            # This will decide the sign
             sign = np.random.uniform(0, 1)
             if sign > 0.5:
                 return i
@@ -33,13 +35,14 @@ def runExperiment(N, num_exp):
         sample_sigmas[exp] = np.std(samples)
     return sample_means, sample_sigmas
 
-def plotMeans(sample_means, plot):
+def plotMeans(sample_means, plot, N):
     fig = plt.figure() 
     ax = fig.gca()
     ax.hist(sample_means, bins = np.arange(-10, 11, 1))
     ax.set_xlim([-10, 10])
     ax.set_ylim([0, 4000])
     plt.plot()
+    plt.title('Histogram of sample-mean, N = %s' % N)
     plt.savefig(plot)
 
 def writeParams(sample_params, f):
@@ -96,7 +99,7 @@ if __name__ == '__main__':
         writeParams(sample_params, 'results/problem_4/%s.txt' % N)
     sample_params = readParams('results/problem_4/%s.txt' % N)
     sample_means, sample_sigmas = sample_params
-    plotMeans(sample_means, 'plots/problem_4/%s.jpg' % N)
+    plotMeans(sample_means, 'plots/problem_4/%s.jpg' % N, N)
     count_1 = countInterval(sample_means, -0.01, 0.01)
     count_2 = countInterval(sample_means, -0.1, 0.1)
     print '[-0.01, 0.01] : %s' % count_1
@@ -106,7 +109,7 @@ if __name__ == '__main__':
     for c in conf:
         if c[0] < mu and c[1] > mu:
             count += 1
-        print c[0], c[1]
+        #print c[0], c[1]
     print count / num_exp * 100
     '''
     for sigma in sample_sigmas:

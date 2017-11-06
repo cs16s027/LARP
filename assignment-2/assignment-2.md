@@ -1,5 +1,9 @@
 ### LARP : Assignment-2
 
+**Sankaran Vaidyanathan (CS17Z015) and Karthik Thiagarajan (CS16S027)**
+
+[TOC]
+
 #### Problem-1
 
 Each random variable $$X_i$$  is distributed with mean $\mu$ and variance $\sigma^{2}$. Then, the mean of the random variables is also a random variable:
@@ -51,6 +55,10 @@ $$
 ---
 
 #### Problem-3
+
+![](plots/problem_3/v_2/10_100.jpg)
+
+![](plots/problem_3/v_2/1000_10000.jpg)
 
 (a) The sample mean is close to the true mean. From the first question, we know that the sample mean of $N$ i.i.d random variables, each having mean $\mu$ and variance $\sigma^2$, is also a random variable with mean $\mu$ and variance $\frac{\sigma^2}{N}$. For any given experiment with $N$ samples, their mean is one realisation of this random variable.
 
@@ -119,6 +127,12 @@ Every addition of a decimal place contributes to at least an order of magnitude 
 
 #### Problem-4
 
+![](plots/problem_4/10_100.jpg)
+
+![](plots/problem_4/1000_10000.jpg)
+
+
+
 (a)
 $$
 f_X(k) = \frac{A}{k^2}, k \in \mathbb{Z} - \{0\}
@@ -164,6 +178,40 @@ The sample mean concentrates around $0$. This is because the true mean of $X$ is
 | (-22, 75) |  (-3, 1)  |
 |  (-1, 5)  | (-13, 3)  |
 | (-14, 4)  | (-0.5, 1) |
-|   9.8%    |  98.06%   |
+|  97.55%   |  98.06%   |
 
-The last row contains the percentage of intervals containing the true mean. One observation is that the variance in the endpoints of the interval is very high.
+The last row contains the percentage of intervals containing the true mean. One observation is that the variance in the endpoints of the interval is very high. Let us look at the formula for the confidence interval:
+$$
+[\bar{X} - z \frac{\sigma}{\sqrt{N}}, \bar{X} + z \frac{\sigma}{\sqrt{N}}]
+$$
+The erratic behavior of the endpoints is due to the high variance, $\sigma$. Some of the sample variances are 23, 58, 281 and 606.  Why is $\sigma$ so high? Let us look at the p.m.f values of both Poisson and $X$ around their respective means. 
+
+Poisson:
+
+|  k   | $\mathbb{P}(k)$ |
+| :--: | :-------------: |
+|  0   |      4e-5       |
+|  5   |      3e-2       |
+|  10  |      0.12       |
+|  15  |      3e-2       |
+|  20  |      1e-4       |
+|  25  |      4e-12      |
+
+
+
+For $X$ in this problem:
+
+|    k    | $\mathbb{P}(k)$ |
+| :-----: | :-------------: |
+| $\pm$50 |      1e-4       |
+| $\pm$45 |      1e-4       |
+| $\pm$25 |      4e-4       |
+| $\pm$5  |      1e-2       |
+| $\pm$1  |       0.6       |
+
+Note that the probability mass is decays rapidly on either side of the mean for Poisson. But the decay is more controlled for $X$. This is because the square in the denominator grows much slower than the factorical. As a consequence the probability mass is more evenly distributed in $X$. This explains the high value of the sample variance.
+
+
+$$
+\text{END}
+$$
